@@ -27,7 +27,7 @@ describe("learn about locators", () => {
   it('Adding another todo items', () => {
 
     const newItem = 'Reading every 2am at nyt'
-    cy.get('input[class="new-todo"]').type(`${newItem}{enter}`, {delay:500})
+    cy.get('input[class="new-todo"]').type(`${newItem}{enter}`, {delay:200})
 
     // Verify the user is having 3 list on todo list
     cy.get('.todo-list li')
@@ -48,6 +48,32 @@ describe("learn about locators", () => {
       .parents('li')
       .should('have.class', 'completed')
 
-
   })
+
+  // context('confirm the checked task', () =>{
+  //   beforeEach(() => {
+  //     cy.contains("Walk the dog")
+  //       .parent()
+  //       .find('input[type=checkbox]')
+  //       .check()
+  //   })
+  it('with a checked task', () => {
+      // We'll take the command we used above to check off an element
+      // Since we want to perform multiple tests that start with checking
+      // one element, we put it in the beforeEach hook
+      // so that it runs at the start of every test.
+      cy.contains('Walk the dog')
+        .parent()
+        .find('input[type=checkbox]')
+        .check()
+  })
+
+  it('Verify if uncompleted task is remaining one ', () =>{
+
+      cy.contains('Active').click()
+        .should('have.length', 1)
+        .first()
+    
+  })
+
 })
