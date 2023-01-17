@@ -1,0 +1,62 @@
+name: To-do Cypress testing CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x, 15.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm i
+      - run: npm run build --if-present
+      - run: npm test --if-present
+
+  # deploy:
+
+  #   needs: build
+
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+
+  #     - name: Deploy NodeJS app
+
+  #       uses: appleboy/ssh-action@v0.1.2
+
+  #       with:
+
+  #         host: ${{secrets.SSH_HOST}}
+
+  #         username: ${{ secrets.SSH_USERNAME }}
+
+  #         password: ${{ secrets.SSH_PASSWORD }}
+
+  #         script: |
+
+  #           cd ${{ secrets.APP_DIR }} # navigat into folder
+
+  #           git remote set-url origin ${{ secrets.GIT_ORIGIN }}
+
+  #           git checkout -f
+
+  #           git pull origin master
+
+  #           npm install # install dependencies
+
+  #           npm run build # build the app for dev env
+
+  #           docker-compose up -d --build # builf the container again    
