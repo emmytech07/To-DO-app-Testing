@@ -50,13 +50,6 @@ describe("learn about locators", () => {
 
   })
 
-  // context('confirm the checked task', () =>{
-  //   beforeEach(() => {
-  //     cy.contains("Walk the dog")
-  //       .parent()
-  //       .find('input[type=checkbox]')
-  //       .check()
-  //   })
   it('with a checked task', () => {
       // We'll take the command we used above to check off an element
       // Since we want to perform multiple tests that start with checking
@@ -73,7 +66,9 @@ describe("learn about locators", () => {
       cy.contains('Active').click()
         .should('have.length', 1)
         .first()
-    
+        // .should('have.text', 'Reading every 2am at nyt')
+        // .should('have.text', 'Pay electric bill')
+        
   })
 
 })
