@@ -45,7 +45,40 @@ context('Actions', () => {
     cy.get('.action-form')
       .submit()
       .next()
-    //   .should('contain', 'Your form has been submitted!')
-      .should('have.value','Your form has been submitted!')
+      .should('contain', 'Your form has been submitted!')
+    //   .should('have.value','Your form has been submitted!')
+  })
+
+  it("varify to click in 9 specific position on the button", ()=> {
+    cy.get('.action-btn').click()
+
+    // clicking in the center of the element is the default
+    cy.get('#action-canvas').click()
+
+    cy.get('#action-canvas').click('topLeft')
+    cy.get('#action-canvas').click('top')
+    cy.get('#action-canvas').click('topRight')
+    cy.get('#action-canvas').click('left')
+    cy.get('#action-canvas').click('right')
+    cy.get('#action-canvas').click('bottomLeft')
+    cy.get('#action-canvas').click('bottom')
+    cy.get('#action-canvas').click('bottomRight')
+
+    // click multiple elements by passing multiple: true
+    cy.get('.action-labels>.label').click({ multiple: true })
+    // Ignore error checking prior to clicking
+    cy.get('.action-opacity>.btn').click({ force: true })
+  })
+
+  it('verify input text can enable double', () => {
+    
+    cy.get('.action-div').dblclick().should('not.be.visible')
+    cy.get('.action-input-hidden').should('be.visible')
+  })
+  
+  it('.Verify if user can right click on a button', () => {
+    
+    cy.get('.rightclick-action-div').rightclick().should('not.be.visible')
+    cy.get('.rightclick-action-input-hidden').should('be.visible')
   })
 })
