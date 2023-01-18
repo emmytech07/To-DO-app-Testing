@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 
-describe("learn about locators", () => {
+describe("Verify details about locator", () => {
   beforeEach(() => {
       // Cypress starts out with a blank slate for each test
       // so we must tell it to visit our website with the `cy.visit()` command.
@@ -11,7 +11,7 @@ describe("learn about locators", () => {
       
   })
  
-  it("confirm todo items by default is two", () => {
+  it("verify todo items by default is two", () => {
     cy.get('.todo-list li').should('have.length', 2)
     
     cy.get(".todo-list li")
@@ -24,7 +24,7 @@ describe("learn about locators", () => {
 
   })
 
-  it('Adding another todo items', () => {
+  it('verify another todo items', () => {
 
     const newItem = 'Reading every 2am at nyt'
     cy.get('input[class="new-todo"]').type(`${newItem}{enter}`, {delay:200})
@@ -36,7 +36,7 @@ describe("learn about locators", () => {
       .should('have.text', newItem)
   })
 
-  it('Checking for completed items on todo list', ()=>{
+  it('verify for completed items on todo list', ()=>{
 
     cy.contains('Pay electric bill')
       .parent()
@@ -50,7 +50,7 @@ describe("learn about locators", () => {
 
   })
 
-  it('with a checked task', () => {
+  it('verify with a checked task', () => {
       // We'll take the command we used above to check off an element
       // Since we want to perform multiple tests that start with checking
       // one element, we put it in the beforeEach hook
