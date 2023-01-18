@@ -127,6 +127,11 @@ it('Verify that user can select an options', () => {
     cy.get('.action-select')
       .should('have.value', '--Select a fruit--')
     cy.get('.action-select').select('apples')
+
+    // cy.intercept('GET', '**/comments/*')
+    //   .as('getComment')
+    //   cy.wait('@getComment').its('response.statusCode')
+    //   .should('eq', 200)
     cy.get('.action-select').should('have.value', 'fr-apples')
 
     it("Verify that user can have multiple selection ", () => {
@@ -143,6 +148,7 @@ it("verify an element is not having horizontal view", () => {
     cy.get('#scroll-horizontal button')
       .should('not.be.visible')
 
+      
     cy.get('#scroll-horizontal button').scrollIntoView()
     .should('be.visible')
 
