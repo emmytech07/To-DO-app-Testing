@@ -122,7 +122,38 @@ cy.get('.action-check [type="checkbox"]')
 cy.get('.action-check [disabled]')
 .uncheck({ force: true }).should('not.be.checked')
     })
-    
+   
+it('Verify that user can select an options', () => {
+    cy.get('.action-select')
+      .should('have.value', '--Select a fruit--')
+    cy.get('.action-select').select('apples')
+    cy.get('.action-select').should('have.value', 'fr-apples')
 
+    it("Verify that user can have multiple selection ", () => {
+        cy.get('.action-select-multiple')
+          .select(['apples', 'oranges', 'bananas'])
+          // when getting multiple values, invoke "val" method first
+          .invoke('val')
+          .should('deep.equal', ['fr-apples', 'fr-oranges', 'fr-bananas'])
+
+    })
+})
+
+it("verify an element is not having horizontal view", () => {
+    cy.get('#scroll-horizontal button')
+      .should('not.be.visible')
+
+    cy.get('#scroll-horizontal button').scrollIntoView()
+    .should('be.visible')
+
+     // Cypress handles the scroll direction needed
+     cy.get('#scroll-vertical button').scrollIntoView()
+     .should('be.visible')
+
+     cy.get('#scroll-both button')
+     .should('not.be.visible')
+
+})
+    
 })
 
